@@ -3,7 +3,7 @@ import numpy as np
 
 
 SAMPLE_POINTS: int = 10_000
-BROWNIAN_MOTIONS: int = 500
+BROWNIAN_MOTIONS: int = 100
 START_TIME: float = 0.0
 FINAL_TIME: float = 1.0
 
@@ -19,8 +19,8 @@ def main() -> None:
     t_step: float = times[1] - times[0]
     
     b_step: float = np.sqrt(t_step) * np.random.normal(size=(SAMPLE_POINTS - 1, BROWNIAN_MOTIONS))
-    b0 = np.zeros(shape=(1, BROWNIAN_MOTIONS))
-    b = np.concatenate((b0, np.cumsum(b_step, axis=0)), axis=0)
+    b0: np.ndarray = np.zeros(shape=(1, BROWNIAN_MOTIONS))
+    b: np.ndarray = np.concatenate((b0, np.cumsum(b_step, axis=0)), axis=0)
     
     plt.plot(times, b)
     plt.show()
